@@ -6,12 +6,12 @@ public:
             return ;
         }
             if(str.empty() || str.back() != '0'){
-            str= str +'0' ; 
+            str.push_back('0');
             convert(ans , n , str ) ; 
             str.pop_back() ;   
             }
            
-            str = str +'1' ; 
+            str.push_back('1'); 
             convert(ans , n , str  ); 
             str.pop_back() ; 
     
