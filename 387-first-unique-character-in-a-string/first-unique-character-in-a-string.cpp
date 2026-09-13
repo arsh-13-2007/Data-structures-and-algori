@@ -1,13 +1,13 @@
 class Solution {
 public:
     int firstUniqChar(string s) {
-        unordered_map<char , int >mp ; 
+        vector<int>freq(26,0);
         for(int i = 0 ;i < s.length() ; i++){
-            mp[s[i]]++ ; 
+            freq[s[i] - 'a']++ ; 
         }
         int flag = -1 ; 
         for(int i = 0 ; i < s.length() ; i++){
-            if(mp[s[i]] == 1){
+            if(freq[s[i] - 'a'] == 1 ){
                 flag = i ; 
                 break ; 
             }
