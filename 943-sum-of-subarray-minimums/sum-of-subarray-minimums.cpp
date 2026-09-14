@@ -45,7 +45,7 @@ public:
             long long lc = i - left[i];
             long long rc = right[i] - i;
 
-         ans = (ans + (1LL * arr[i] * lc % MOD) * rc % MOD) % MOD;
+         ans = (ans + (1LL * arr[i] * lc* rc) % MOD) % MOD;
         }
     return ans ; 
    }
