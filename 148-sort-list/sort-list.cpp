@@ -11,58 +11,41 @@
 class Solution {
 public:
     ListNode* merge(ListNode * left  , ListNode* right){
-        ListNode* ptr1 = left ;
-        ListNode* ptr2 = right ; 
-        ListNode* ptr3;
-        if(ptr1->val > ptr2->val ){
-            ptr3 = new ListNode(ptr2->val) ; 
-            ptr2 = ptr2->next ; 
-        }
-        else{
-            ptr3 = new ListNode(ptr1->val) ; 
-            ptr1 = ptr1->next ; 
-        }
-        ListNode* head1 = ptr3 ; 
-        ListNode* ptr4 = ptr3 ; 
-         while (ptr1 != NULL && ptr2 != NULL) {
-            if(ptr1->val > ptr2->val ){
-                ptr3 = new ListNode(ptr2->val) ;
-                ptr4->next = ptr3 ; 
-                ptr4 = ptr3 ; 
-                ptr2 = ptr2->next ; 
+        ListNode dummy(0) ; 
+        ListNode*  tail = &dummy ; 
+         while (left != NULL && right != NULL) {
+            if(left->val > right->val ){
+                tail->next = right ;
+                right = right->next ; 
             }
         else{
-                ptr3 = new ListNode(ptr1->val) ; 
-                ptr4->next = ptr3 ; 
-                ptr4 = ptr3 ; 
-                ptr1 = ptr1->next ; }
+               tail->next = left ; 
+               left = left->next ;}
+        tail = tail->next;
         }
-        if(ptr1 == NULL){
-            ptr4->next = ptr2 ; 
+        if(left == NULL){
+            tail->next = right ; 
         }
         else{
-            ptr4->next = ptr1 ; 
+            tail->next = left ; 
         }
-        return head1 ; 
+        return dummy.next ; 
         }
     ListNode* merge_sort(ListNode* head ){
         if(head == NULL || head->next == NULL){
             return head ; 
         }
-        ListNode* ptr = head;
-        ListNode* slow = ptr  ; 
-        ListNode* fast = ptr->next ; 
+        ListNode* slow = head  ; 
+        ListNode* fast = head->next ; 
         while(fast != NULL && fast->next != NULL){
             slow = slow->next ; 
             fast = fast->next->next ; 
         } 
         ListNode* midnxt = slow->next ; 
         slow->next = NULL ; 
-        ListNode* left  = merge_sort(ptr); 
+        ListNode* left  = merge_sort(head); 
         ListNode* right = merge_sort(midnxt);
-        return merge(left , right ) ; 
-
-        
+        return merge(left , right ) ;
     }
     ListNode* sortList(ListNode* head) {
         return merge_sort(head) ; 
