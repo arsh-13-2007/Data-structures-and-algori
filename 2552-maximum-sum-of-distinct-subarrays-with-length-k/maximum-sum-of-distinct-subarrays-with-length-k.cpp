@@ -11,9 +11,6 @@ public:
             while(mp[nums[right]]> 1 || right - left+1 > k ){
                 mp[nums[left]]-- ; 
                 sum = sum- nums[left] ; 
-                if (mp[nums[left]] == 0) {
-                    mp.erase(nums[left]);
-                }
                 left++ ; 
             }
             if (right - left + 1 == k) {
