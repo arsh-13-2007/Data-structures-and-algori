@@ -1,15 +1,17 @@
 class Solution {
 public:
     int partitionString(string s) {
-        unordered_map<char , int> mp ;
-        int count = 0 ;  
-        for(int i = 0; i < s.size() ; i++){
-            if(mp.find(s[i]) != mp.end()){
-                mp.clear() ; 
-                count++ ;  
+        vector<int>freq(26 , 0 ) ; 
+        int count = 1 ; 
+        for(int i = 0 ; i < s.size()  ; i++){
+            if(freq[s[i] - 'a'] != 0 ){
+                count++ ; 
+                for(int i = 0 ; i < 26 ; i++){
+                    freq[i] = 0 ; 
+                }
             }
-            mp[s[i]]++ ; 
+            freq[s[i] - 'a']++ ; 
         }
-    return count +1  ; 
+    return count; 
     }
 };
