@@ -11,23 +11,23 @@
  */
 class Solution {
 public:
-    void check(TreeNode * root , vector<int>&ans){
-        if(root == NULL){
-            ans.push_back(INT_MIN) ; 
-            return ; 
-        }
-        ans.push_back(root->val) ; 
-        check(root->left , ans ) ; 
-        check(root->right , ans ) ; 
-    }
-    bool isSameTree(TreeNode* p, TreeNode* q) {
-        vector<int>ans ; 
-        vector<int>ans1 ; 
-        check(p , ans) ; 
-        check(q , ans1) ; 
-        if(ans == ans1){
+    bool check(TreeNode* p , TreeNode* q){
+        if(p == NULL && q == NULL){
             return true ; 
         }
-        return false ; 
+        if (p == NULL || q == NULL) {
+            return false;
+        }
+        if(p->val != q->val ){
+            return false ; 
+        }
+        
+        return check(p->left , q->left) && check(p->right , q -> right) ; 
+    }
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        if( p == NULL && q == NULL){
+            return true ; 
+        }
+        return check(p , q ) ; 
     }
 };
