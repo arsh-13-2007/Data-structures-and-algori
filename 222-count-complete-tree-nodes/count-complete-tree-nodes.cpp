@@ -11,28 +11,35 @@
  */
 class Solution {
 public:
+    int leftside(TreeNode* root){
+        TreeNode* ptr = root; 
+        int lh = 0 ; 
+        while(ptr != NULL){
+            ptr = ptr->left ; 
+            lh ++ ;
+        }
+        return lh ; 
+    }
+    int rightside(TreeNode* root){
+        TreeNode * ptr = root ;
+        int rh = 0 ;
+        while(ptr != NULL){
+            ptr = ptr->right; 
+            rh++ ;
+        } 
+        return rh ;
+    }
     int countNodes(TreeNode* root) {
-        if (root == nullptr) return 0;
+        if(root == NULL){
+            return 0 ; 
+        }
+        int lh = leftside(root) ; 
+        int rh = rightside(root) ; 
 
-        int leftHeight = 0, rightHeight = 0;
-
-        TreeNode* left = root;
-        TreeNode* right = root;
-
-        while (left) {
-            leftHeight++;
-            left = left->left;
+        if(lh == rh){
+            return (1<<lh) -1  ; 
         }
 
-        while (right) {
-            rightHeight++;
-            right = right->right;
-        }
-
-        if (leftHeight == rightHeight) {
-            return (1 << leftHeight) - 1;
-        }
-
-        return 1 + countNodes(root->left) + countNodes(root->right);
+        return countNodes(root->left)+ countNodes(root->right) +1 ; 
     }
 };
