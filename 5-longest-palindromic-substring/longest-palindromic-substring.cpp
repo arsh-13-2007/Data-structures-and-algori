@@ -8,7 +8,7 @@ public:
         for (int i = 0; i < n; i++) {
             int left = i;
             int right = i;
-
+            // for odd size array
             while (left >= 0 && right < n &&
                    s[left] == s[right]) {
 
@@ -22,7 +22,7 @@ public:
             }
             left = i;
             right = i + 1;
-
+            // even size array
             while (left >= 0 && right < n &&
                    s[left] == s[right]) {
 
